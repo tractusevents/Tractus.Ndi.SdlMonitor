@@ -150,42 +150,48 @@ public class NdiSdlWindow : IDisposable
                     if (e.button.button == SDL.SDL_BUTTON_RIGHT)
                     {
                         var sources = this.ndiFinder.Sources;
-                        var requestedNewSourceName = PInvokeHelpersWindows.ShowContextMenu(this.window, sources);
-
-                        Log.Information($"Result: {requestedNewSourceName}");
-                        if (requestedNewSourceName?.StartsWith("!!") == true)
+                        var requestedNewSourceName = string.Empty;
+                        if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                         {
-                            if (requestedNewSourceName == "!!TOGGLEFS")
-                            {
-                                ToggleFullscreen(this.window);
-                            }
-                            else if (requestedNewSourceName == "!!EXIT")
-                            {
-                                Environment.Exit(0);
-                                this.running = false;
-                                return;
-                            }
-                            else if(requestedNewSourceName == "!!DISC")
-                            {
-                                sourceName = "(None)";
-                                SDL.SDL_SetWindowTitle(this.window, $"Tractus Monitor for NDI - (None)");
-                                NDIWrapper.recv_connect(this.receiver, nint.Zero);
-                            }
-                        }
-                        else if (!string.IsNullOrEmpty(requestedNewSourceName))
-                        {
-                            var newSource = new NDIlib.source_t
-                            {
-                                p_ndi_name = UTF.StringToUtf8(requestedNewSourceName)
-                            };
+                            requestedNewSourceName = PInvokeHelpersWindows.ShowContextMenu(this.window, sources);
 
-                            NDIWrapper.recv_connect(this.receiver, ref newSource);
-                            sourceName = requestedNewSourceName;
-                            Log.Information($"About to connect to {requestedNewSourceName}...");
-                            SDL.SDL_SetWindowTitle(this.window, $"Tractus Monitor for NDI - {requestedNewSourceName}");
+                            Log.Information($"Result: {requestedNewSourceName}");
+                            if (requestedNewSourceName?.StartsWith("!!") == true)
+                            {
+                                if (requestedNewSourceName == "!!TOGGLEFS")
+                                {
+                                    ToggleFullscreen(this.window);
+                                }
+                                else if (requestedNewSourceName == "!!EXIT")
+                                {
+                                    Environment.Exit(0);
+                                    this.running = false;
+                                    return;
+                                }
+                                else if(requestedNewSourceName == "!!DISC")
+                                {
+                                    sourceName = "(None)";
+                                    SDL.SDL_SetWindowTitle(this.window, $"Tractus Monitor for NDI - (None)");
+                                    NDIWrapper.recv_connect(this.receiver, nint.Zero);
+                                }
+                            }
+                            else if (!string.IsNullOrEmpty(requestedNewSourceName))
+                            {
+                                var newSource = new NDIlib.source_t
+                                {
+                                    p_ndi_name = UTF.StringToUtf8(requestedNewSourceName)
+                                };
 
-                            Marshal.FreeHGlobal(newSource.p_ndi_name);
+                                NDIWrapper.recv_connect(this.receiver, ref newSource);
+                                sourceName = requestedNewSourceName;
+                                Log.Information($"About to connect to {requestedNewSourceName}...");
+                                SDL.SDL_SetWindowTitle(this.window, $"Tractus Monitor for NDI - {requestedNewSourceName}");
+
+                                Marshal.FreeHGlobal(newSource.p_ndi_name);
+                            }
+
                         }
+
                     }
                 }
                 else if (e.type == SDL.SDL_EventType.SDL_JOYAXISMOTION)
