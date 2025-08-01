@@ -11,7 +11,7 @@ support scenarios where a GPU is not present or supported - Studio Monitor requi
 
 ## Running Monitor for NDI
 
-Download the release ZIP and extract it to your PC. Run `Tractus.Ndi.SdlMonitor.exe`.
+Download the latest release from https://u.tractus.ca/nditoolbelt/mon_win_x64, extract it to your PC. Run `Tractus.Ndi.SdlMonitor.exe`.
 
 Note that you can launch multiple copies of this application.
 
