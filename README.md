@@ -24,4 +24,8 @@ Unlike regular Studio Monitor, this does not remember any settings on exit.
 - Full-Screen or Windowed mode: Alt-Enter full-screens the application.
 - Assign sources via Discovery: New to NDI 6.2, you can use Discovery to assign sources to the viewport.
 
+## License
+
+This software is licensed under the MIT License.
+
 NDI® is a registered trademark of Vizrt NDI AB. https://ndi.video/
