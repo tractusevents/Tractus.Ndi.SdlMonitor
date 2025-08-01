@@ -1,6 +1,6 @@
 ﻿# Tractus Monitor for NDI
 
-This utility displays a single NDI source in a window on Windows 10/11. If you've used Studio Monitor from [https://ndi.video/tools/](NDI Tools), this application will feel quite familiar.
+This utility displays a single NDI source in a window on Windows 10/11. If you've used Studio Monitor from [NDI Tools](https://ndi.video/tools/), this application will feel quite familiar.
 
 ## Studio Monitor exists - why create this?
 
@@ -23,3 +23,5 @@ Unlike regular Studio Monitor, this does not remember any settings on exit.
 - Right-click source select: Select a source by right-clicking the viewer.
 - Full-Screen or Windowed mode: Alt-Enter full-screens the application.
 - Assign sources via Discovery: New to NDI 6.2, you can use Discovery to assign sources to the viewport.
+
+NDI® is a registered trademark of Vizrt NDI AB. https://ndi.video/
